@@ -129,7 +129,7 @@ s2.257,1.01,2.257,2.257V39.73C13.934,40.597,15.302,42.554,15.302,44.833z'fill=#F
 </div>
 <div class='side-by-side text'>Temperature</div>
 <div class='side-by-side reading'>
-22
+%TEMPERATURE%
 <span class='superscript'>&deg;C</span></div>
 </div>
 <div class='data humidity'>
@@ -138,7 +138,7 @@ s2.257,1.01,2.257,2.257V39.73C13.934,40.597,15.302,42.554,15.302,44.833z'fill=#F
 </div>
 <div class='side-by-side text'>Humidity</div>
 <div class='side-by-side reading'>
-40
+%HUMIDITY%
 <span class='superscript'>%</span></div>
 </div>
 <div class='data pressure'>
@@ -146,7 +146,7 @@ s2.257,1.01,2.257,2.257V39.73C13.934,40.597,15.302,42.554,15.302,44.833z'fill=#F
 <svg enable-background='new 0 0 40.542 40.541'height=40.541px id=Layer_1 version=1.1 viewBox='0 0 40.542 40.541'width=40.542px x=0px xml:space=preserve xmlns=http://www.w3.org/2000/svg xmlns:xlink=http://www.w3.org/1999/xlink y=0px><g><path d='M34.313,20.271c0-0.552,0.447-1,1-1h5.178c-0.236-4.841-2.163-9.228-5.214-12.593l-3.425,3.424c-0.195,0.195-0.451,0.293-0.707,0.293s-0.512-0.098-0.707-0.293c-0.391-0.391-0.391-1.023,0-1.414l3.425-3.424c-3.375-3.059-7.776-4.987-12.634-5.215c0.015,0.067,0.041,0.13,0.041,0.202v4.687c0,0.552-0.447,1-1,1s-1-0.448-1-1V0.25c0-0.071,0.026-0.134,0.041-0.202C14.39,0.279,9.936,2.256,6.544,5.385l3.576,3.577c0.391,0.391,0.391,1.024,0,1.414c-0.195,0.195-0.451,0.293-0.707,0.293s-0.512-0.098-0.707-0.293L5.142,6.812c-2.98,3.348-4.858,7.682-5.092,12.459h4.804c0.552,0,1,0.448,1,1s-0.448,1-1,1H0.05c0.525,10.728,9.362,19.271,20.22,19.271c10.857,0,19.696-8.543,20.22-19.271h-5.178C34.76,21.271,34.313,20.823,34.313,20.271z M23.084,22.037c-0.559,1.561-2.274,2.372-3.833,1.814c-1.561-0.557-2.373-2.272-1.815-3.833c0.372-1.041,1.263-1.737,2.277-1.928L25.2,7.202L22.497,19.05C23.196,19.843,23.464,20.973,23.084,22.037z'fill=#26B999 /></g></svg>
 </div>
 <div class='side-by-side text'>Pressure</div>
-<div class='side-by-side reading'>749<span class='superscript'>mmHg</span></div>
+<div class='side-by-side reading'>%PRESURE%<span class='superscript'>mmHg</span></div>
 </div>
 <div class='data altitude'>
 <div class='side-by-side icon'>
@@ -323,8 +323,14 @@ String processor(const String& var){
 
 String processor_sensor(const String& var){
   //Serial.println(var);
-  if(var == "LISTSSID"){
-    return st;
+  if(var == "TEMPERATURE"){
+    return temperature;
+  }
+  if(var == "HUMIDITY"){
+    return humidity;
+  }
+  if(var == "PRESURE"){
+    return pressure;
   }
   return String();
 }
