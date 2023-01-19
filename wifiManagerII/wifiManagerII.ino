@@ -324,13 +324,13 @@ String processor(const String& var){
 String processor_sensor(const String& var){
   //Serial.println(var);
   if(var == "TEMPERATURE"){
-    return temperature;
+    return String(temperature);
   }
   if(var == "HUMIDITY"){
-    return humidity;
+    return String(humidity);
   }
   if(var == "PRESURE"){
-    return pressure;
+    return String(pressure);
   }
   return String();
 }
