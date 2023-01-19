@@ -96,7 +96,7 @@ void listDir(const char * dirname){
 const char main_html[] PROGMEM = R"rawliteral(<!DOCTYPE html>
 <html>
 <head>
-<title>ESP8266 Weather Station</title>
+<title>Weather Station</title>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet'>
 <style>
@@ -117,7 +117,7 @@ h1 {margin: 50px auto 30px;}
 </style>
 </head>
 <body>
-<h1>ESP8266 Weather Station</h1>
+<h1>Weather Station</h1>
 <div class='container'>
 <div class='data temperature'>
 <div class='side-by-side icon'>
@@ -441,7 +441,7 @@ void connectMQTT(){
       retries++;
       String clientId = "Client-";
       clientId += String(random(0xffff), HEX);
-      //"rpirf", "1155221a!"
+
       if(client.connect(clientId.c_str(),MQTTlogin.c_str(), MQTTpass.c_str())){
         Serial.println("Successfully connected MQTT");
       } else {
@@ -593,7 +593,6 @@ void setup() {
               // Write file to save value
               writeFile(SPIFFS, NarodMonPath, NarodMon.c_str());
             }
-            //Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
           }
         }
         restart = true;
