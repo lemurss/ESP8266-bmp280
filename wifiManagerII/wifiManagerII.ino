@@ -19,7 +19,7 @@
 //                     MQTT server adress                                                          //
 //                     MQTT login                                                                  //
 //                     MQTT Password                                                               //
-//                     NarodMonitor* path                                                          //
+//                     NarodMonitor* device MAC                                                    //
 //               *NarodMonitor - free monitoring system, collected info from many users sensors    //
 //                https://narodmon.ru/ - main adress                                               //
 //                                                                                                 //
@@ -96,9 +96,9 @@ void listDir(const char * dirname){
 const char main_html[] PROGMEM = R"rawliteral(<!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Refresh" content="15" >
 <title>Weather Station</title>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet'>
 <style>
 html { font-family: 'Open Sans', sans-serif; display: block; margin: 0px auto; text-align: center;color: #444444;}
 body{margin: 0px;} 
@@ -298,8 +298,8 @@ const char index_html[] PROGMEM = R"rawliteral(
                                     <input type="password" name="mqttpass" id="pass">
                                 </div>
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">Сервер Narod Mon, путь:</span><br>
-                                    <input type="text" name="narodmon" id="pass">
+                                    <span class="input-group-text">МАК для авторизации на Народном мониторинге:</span><br>
+                                    <input type="text" name="narodmon" id="nmmac">
                                 </div>
                                 <center><button type="submit" class="btn btn-success">Submit</button></center>
                             </form>
@@ -398,7 +398,7 @@ void writeFile(fs::FS &fs, const char * path, const char * message){
 
 bool SendToNarodmon() { // Собственно формирование пакета и отправка.
   String buf;
-  buf = "#POKROV1OUT\n"; //mac адрес для авторизации датчика
+  buf = "#"+String(NarodMon)+"\n"; // "#POKROV1OUT\n"; //mac адрес для авторизации датчика
   buf = buf + "#TEMPC#" + String(temperature) + "#Датчик температуры BMx280\n"; //показания температуры
   buf = buf + "#HUMID#" + String(humidity) + "#Датчик влажности BMx280\n"; //показания влажности
   buf = buf + "#PRESS#" + String(pressure) + "#Датчик давления BMx280\n"; //показания давления
@@ -604,6 +604,7 @@ void setup() {
 }
 
 void loop(){
+  if(restart) ESP.restart();
   if(WiFi.status()==WL_CONNECTED)//WiFi has succesfully Connected
   {
     unsigned long now = millis();
